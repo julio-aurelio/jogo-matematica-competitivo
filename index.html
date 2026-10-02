@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desafio da Matemática</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+
+  <div id="top" hidden>
+    <button id="back">← Voltar</button>
+    <button id="home">🏠 Início</button>
+  </div>
+
+  <!-- 1. ano -->
+  <section id="s-ano" class="screen">
+    <h1>🧮 Desafio da Matemática</h1>
+    <h2>Qual é o seu ano?</h2>
+    <div class="ano-grid">
+      <button class="ano" data-ano="6">6º<small>ano</small></button>
+      <button class="ano" data-ano="7">7º<small>ano</small></button>
+      <button class="ano" data-ano="8">8º<small>ano</small></button>
+      <button class="ano" data-ano="9">9º<small>ano</small></button>
+    </div>
+    <button id="to-rank" class="link">🏆 Ver ranking</button>
+  </section>
+
+  <!-- 2. nome -->
+  <section id="s-nome" class="screen" hidden>
+    <h2>Quem está jogando?</h2>
+    <form id="form-nome" class="card" autocomplete="off">
+      <label>Seu apelido <input id="nick" maxlength="20" placeholder="Ex: Julinho"></label>
+      <label>Sua turma <input id="turma" maxlength="12" placeholder="Ex: 7A"></label>
+      <button class="big">Continuar ▶</button>
+      <p id="msg" class="msg err" role="alert"></p>
+    </form>
+  </section>
+
+  <!-- 3. operação -->
+  <section id="s-op" class="screen" hidden>
+    <h2>O que vamos treinar?</h2>
+    <p id="quem" class="sub"></p>
+    <div class="op-grid">
+      <button class="opbtn soma" data-jogar="soma"><span class="ic">➕</span><span>Somar<small>60 segundos</small></span></button>
+      <button class="opbtn sub-b" data-jogar="subtracao"><span class="ic">➖</span><span>Subtrair<small>60 segundos</small></span></button>
+      <button class="opbtn mul" data-jogar="multiplicacao"><span class="ic">✖️</span><span>Multiplicar<small>60 segundos</small></span></button>
+      <button class="opbtn div-b" data-jogar="divisao"><span class="ic">➗</span><span>Dividir<small>60 segundos</small></span></button>
+    </div>
+  </section>
+
+  <!-- 4. jogo -->
+  <section id="s-jogo" class="screen" data-transient hidden>
+    <div class="hud">
+      <span>⏱ <b id="time">60</b>s</span>
+      <span>⭐ <b id="score">0</b></span>
+      <span>🔥 <b id="streak">0</b></span>
+      <button id="tabuada-btn" class="small" hidden>📋</button>
+    </div>
+    <div id="tabuada-panel" class="tab-panel" hidden></div>
+    <div class="bar"><div id="barfill"></div></div>
+    <div id="question" class="question">0 + 0</div>
+    <form id="form" autocomplete="off">
+      <input id="answer" type="number" inputmode="numeric" pattern="[0-9]*" aria-label="Resposta">
+      <button class="big">OK</button>
+    </form>
+    <p id="feedback" class="feedback"></p>
+  </section>
+
+  <!-- 5. resultado -->
+  <section id="s-fim" class="screen" data-transient hidden>
+    <h2>⏰ Acabou o tempo!</h2>
+    <div class="card center">
+      <p class="bigscore"><b id="r-score">0</b> pontos</p>
+      <p><b id="r-correct">0</b> acertos · <b id="r-wrong">0</b> erros</p>
+      <p id="r-status" class="msg"></p>
+      <button id="retry-send" hidden>Tentar enviar de novo</button>
+      <div class="row">
+        <button id="again" class="big">🔁 Jogar de novo</button>
+        <button id="see-rank" class="big" style="background:var(--orange)">🏆 Ver ranking</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ranking -->
+  <section id="s-rank" class="screen" hidden>
+    <h2>🏆 Ranking da semana</h2>
+    <p id="week" class="sub"></p>
+    <div class="chips">
+      <button data-rano="6">6º</button><button data-rano="7">7º</button><button data-rano="8">8º</button><button data-rano="9">9º</button>
+    </div>
+    <div class="tabs">
+      <button data-rop="soma">➕ Soma</button><button data-rop="subtracao">➖ Subtração</button>
+      <button data-rop="multiplicacao">✖️ Multiplicação</button><button data-rop="divisao">➗ Divisão</button>
+    </div>
+    <ol id="rank" class="rank"></ol>
+  </section>
+
+</main>
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script src="badwords.js"></script>
+<script src="nav.js"></script>
+<script src="tabuada.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
