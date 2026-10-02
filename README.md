@@ -19,23 +19,26 @@ Em todas as telas (menos a primeira) há os botões **← Voltar** e **🏠 Iní
 ## Banco (Supabase)
 Está em `supabase/schema.sql` (tabela `mat_scores` + funções `submit_score` e `get_weekly_ranking`).
 O mesmo banco é compartilhado com o jogo guiado (coluna `variant`: `normal` / `guiado`), então rode o SQL **uma vez só**.
-Já foi aplicado no projeto "Materiais adaptados". URL e chave ficam em `config.js`.
+Já foi aplicado no projeto "Materiais adaptados".
+URL e chave ficam no `.env` (fora do Git; modelo em `.env.example`). `npm run build` gera `public/js/config.js` a partir dele.
+Na Vercel, cadastre `SUPABASE_URL` e `SUPABASE_KEY` em **Settings > Environment Variables** — o build gera o config lá.
 
 Segurança: ninguém escreve direto na tabela (RLS sem policy de insert); só a função `submit_score`, que valida os dados
 (apelido 2–20 letras, pontos 0–2000). Leitura do ranking é pública.
 
+## Estrutura
+```
+public/          site (index.html, favicon.ico, css/, js/)
+scripts/         gerar-config.js (.env -> public/js/config.js)
+supabase/        schema.sql
+```
+
 ## Rodar local
 ```
-npx serve .
+npm run dev
 ```
 
 ## GitHub + Vercel
-```
-git init
-git add .
-git commit -m "Desafio da Matemática"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/jogo-matematica-normal.git
-git push -u origin main
-```
-Na Vercel: **Add New > Project**, escolha o repositório, deixe *Framework Preset: Other* e clique em **Deploy** (não precisa de build).
+Repositório: https://github.com/julio-aurelio/jogo-matematica-competitivo
+Na Vercel: cadastre `SUPABASE_URL` e `SUPABASE_KEY` em **Settings > Environment Variables** e, em **Settings > Build and Deployment**,
+Output Directory = `public`. Depois faça **Redeploy** (variável nova só entra em deploy novo).
